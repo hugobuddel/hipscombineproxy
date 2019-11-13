@@ -53,10 +53,11 @@ class HiPSProxy(SimpleHTTPRequestHandler):
             SimpleHTTPRequestHandler.do_GET(self)
 
 
-if __name__ == "__main__":
+def main(proxy=HiPSProxy):
+    """Start HiPS Proxy"""
     hostname = "localhost"
     serverport = 8100
-    webserver = HTTPServer((hostname, serverport), HiPSProxy)
+    webserver = HTTPServer((hostname, serverport), proxy)
     print("Server started http://%s:%s" % (hostname, serverport))
 
     try:
@@ -66,3 +67,7 @@ if __name__ == "__main__":
 
     webserver.server_close()
     print("Server stopped.")
+
+
+if __name__ == "__main__":
+    main()

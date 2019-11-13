@@ -1,0 +1,16 @@
+conda create -n hipscombineproxy
+conda activate hipscombineproxy
+conda install requests pillow
+
+mkdir pocdata/kidssmall
+
+pushd pocdata/kidssmall
+wget http://dh-node08.hpc.rug.nl:39443/smallhips/properties
+python ../../kidssmall.py
+popd
+
+java -jar poctools/AladinBeta.jar "http://localhost:8100"
+
+java -jar poctools/AladinBeta.jar "http://dh-node08.hpc.rug.nl:39443/smallhips/"
+java -jar poctools/AladinBeta.jar "http://dh-node06.hpc.rug.nl:39443/smallhips/"
+java -jar poctools/AladinBeta.jar "http://dh-node09.hpc.rug.nl:39443/smallhips/"
